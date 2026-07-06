@@ -6,24 +6,29 @@ const authProvider: AuthProvider = {
       localStorage.setItem("username", username);
       return Promise.resolve();
     }
-    return Promise.reject(new Error("Invalid username or password"));
+    return Promise.reject("Invalid username or password");
   },
+  
   logout: () => {
     localStorage.removeItem("username");
     return Promise.resolve();
   },
+  
   checkAuth: () => {
+    
     return localStorage.getItem("username")
       ? Promise.resolve()
-      : Promise.reject(new Error("User not authenticated"));
+      : Promise.reject({ redirectTo: '/login' }); 
   },
+  
   checkError: ({ status }) => {
     if (status === 401 || status === 403) {
       localStorage.removeItem("username");
-      return Promise.reject(new Error("Unauthorized"));
+      return Promise.reject();
     }
     return Promise.resolve();
   },
+  
   getPermissions: () => Promise.resolve(),
 };
 
