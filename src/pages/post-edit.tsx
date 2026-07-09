@@ -18,6 +18,7 @@ import {
   useNotify,
   useRedirect,
 } from "react-admin";
+import { AmplifyUploaderInput } from "../components/AmplifyUploaderInput";
 
 const validateFutureDate = (value?: string | null): string | undefined => {
   if (!value) return undefined;
@@ -142,6 +143,7 @@ export const PostEdit = () => (
           />
         </SimpleFormIterator>
       </ArrayInput>
+      <AmplifyUploaderInput source="coverImage" label="Cover Image Upload" />
     </SimpleForm>
   </Edit>
 );
